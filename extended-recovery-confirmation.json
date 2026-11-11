@@ -1,0 +1,33 @@
+{
+  "sample_salon": true,
+  "model": "llama3.2:3b",
+  "booking": {
+    "id": "f7ecd17517044283bbaac360b5a1c82f",
+    "request_id": "local-ai-recovery-check",
+    "proposal_id": "de5e7b8fb65e42f4b59611c7db838978",
+    "customer": "Alex (sample customer)",
+    "service_id": "haircut",
+    "stylist_id": "maya",
+    "start": "2026-11-14T15:30:00",
+    "end": "2026-11-14T16:15:00",
+    "cents": 4000,
+    "approved_at": "2026-11-11T13:19:08.178837-08:00",
+    "simulated": 0,
+    "service": "Haircut",
+    "stylist": "Maya"
+  },
+  "original_start": "2026-11-14T13:30:00",
+  "customer_bookings": 1,
+  "simulated_competing_bookings": 1,
+  "real_ai_calls": 11,
+  "agent_roles": [
+    "Booking review agent",
+    "Confirmation agent",
+    "Intake agent",
+    "Recovery agent",
+    "Scheduling agent",
+    "Service matching agent"
+  ],
+  "elapsed_seconds": 198.8,
+  "ai_seconds": 198.46
+}

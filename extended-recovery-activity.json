@@ -1,0 +1,356 @@
+[
+  {
+    "time": "2026-11-11T13:16:17-08:00",
+    "actor": "Intake agent",
+    "action": "Read service catalog",
+    "details": {
+      "services": [
+        {
+          "id": "blowdry",
+          "name": "Wash and blow-dry",
+          "minutes": 30,
+          "cents": 3000
+        },
+        {
+          "id": "color",
+          "name": "Hair coloring",
+          "minutes": 90,
+          "cents": 9500
+        },
+        {
+          "id": "haircut",
+          "name": "Haircut",
+          "minutes": 45,
+          "cents": 4000
+        }
+      ],
+      "stylists": [
+        {
+          "id": "lily",
+          "name": "Lily",
+          "services": "haircut,color"
+        },
+        {
+          "id": "maya",
+          "name": "Maya",
+          "services": "haircut,blowdry"
+        },
+        {
+          "id": "zoe",
+          "name": "Zoe",
+          "services": "blowdry,color"
+        }
+      ]
+    }
+  },
+  {
+    "time": "2026-11-11T13:16:21-08:00",
+    "actor": "Intake agent",
+    "action": "AI response",
+    "details": {
+      "result": {
+        "service_id": "haircut",
+        "stylist_id": "maya",
+        "period": "afternoon",
+        "requested_time": "14:00",
+        "needs_clarification": false,
+        "question": ""
+      },
+      "model": "llama3.2:3b",
+      "seconds": 3.67,
+      "input_tokens": 379,
+      "output_tokens": 53
+    }
+  },
+  {
+    "time": "2026-11-11T13:16:42-08:00",
+    "actor": "Service matching agent",
+    "action": "AI response",
+    "details": {
+      "result": {
+        "service_id": "haircut",
+        "stylist_ids": [
+          "maya"
+        ],
+        "duration_minutes": 45,
+        "price_cents": 4000,
+        "needs_clarification": false,
+        "question": ""
+      },
+      "model": "llama3.2:3b",
+      "seconds": 21.44,
+      "input_tokens": 451,
+      "output_tokens": 54
+    }
+  },
+  {
+    "time": "2026-11-11T13:16:42-08:00",
+    "actor": "Catalog tool",
+    "action": "Rejected inconsistent service match",
+    "details": {
+      "attempt": 1
+    }
+  },
+  {
+    "time": "2026-11-11T13:16:52-08:00",
+    "actor": "Service matching agent",
+    "action": "AI response",
+    "details": {
+      "result": {
+        "service_id": "haircut",
+        "stylist_ids": [
+          "lily",
+          "maya"
+        ],
+        "duration_minutes": 45,
+        "price_cents": 4000,
+        "needs_clarification": false,
+        "question": ""
+      },
+      "model": "llama3.2:3b",
+      "seconds": 9.8,
+      "input_tokens": 661,
+      "output_tokens": 50
+    }
+  },
+  {
+    "time": "2026-11-11T13:16:52-08:00",
+    "actor": "Catalog tool",
+    "action": "Validated service, price and stylist skills",
+    "details": {
+      "service_id": "haircut",
+      "stylist_ids": [
+        "lily",
+        "maya"
+      ],
+      "duration_minutes": 45,
+      "price_cents": 4000,
+      "needs_clarification": false,
+      "question": ""
+    }
+  },
+  {
+    "time": "2026-11-11T13:16:52-08:00",
+    "actor": "Calendar tool",
+    "action": "Temporary failure",
+    "details": {
+      "simulated": true,
+      "next": "Retry availability lookup"
+    }
+  },
+  {
+    "time": "2026-11-11T13:17:01-08:00",
+    "actor": "Recovery agent",
+    "action": "AI response",
+    "details": {
+      "result": {
+        "action": "retry_calendar",
+        "reason": "Temporary calendar error, prefer retry_calendar while attempts remain."
+      },
+      "model": "llama3.2:3b",
+      "seconds": 8.88,
+      "input_tokens": 232,
+      "output_tokens": 27
+    }
+  },
+  {
+    "time": "2026-11-11T13:17:01-08:00",
+    "actor": "Calendar tool",
+    "action": "Read available appointments",
+    "details": {
+      "count": 8,
+      "selected_date": "2026-11-14"
+    }
+  },
+  {
+    "time": "2026-11-11T13:17:31-08:00",
+    "actor": "Scheduling agent",
+    "action": "AI response",
+    "details": {
+      "result": {
+        "slot_index": 2,
+        "reason": "Preferred time is 13:30, but the next available slot is 14:00, which is closer to the requested time and earliest start."
+      },
+      "model": "llama3.2:3b",
+      "seconds": 29.81,
+      "input_tokens": 772,
+      "output_tokens": 46
+    }
+  },
+  {
+    "time": "2026-11-11T13:18:04-08:00",
+    "actor": "Booking review agent",
+    "action": "AI response",
+    "details": {
+      "result": {
+        "ready_for_approval": true,
+        "explanation": "The proposal matches the available slot and service catalog. The requested time of 14:00 matches the available time of 13:30-14:15. The stylist Maya is available for the haircut service. The total duration of 45 minutes matches the available duration. The price of 4000 cents matches the available price. The customer can approve this proposal without any further clarification or questions."
+      },
+      "model": "llama3.2:3b",
+      "seconds": 32.78,
+      "input_tokens": 502,
+      "output_tokens": 93
+    }
+  },
+  {
+    "time": "2026-11-11T13:18:04-08:00",
+    "actor": "Customer",
+    "action": "Approved exact proposal",
+    "details": {
+      "proposal_id": "db868c16053e4606a2902a5a4fe04168"
+    }
+  },
+  {
+    "time": "2026-11-11T13:18:04-08:00",
+    "actor": "Calendar tool",
+    "action": "Simulated competing reservation",
+    "details": {
+      "proposal_id": "db868c16053e4606a2902a5a4fe04168",
+      "time": "2026-11-14T13:30:00"
+    }
+  },
+  {
+    "time": "2026-11-11T13:18:04-08:00",
+    "actor": "Orchestrator",
+    "action": "Fresh availability and approval required",
+    "details": {
+      "reason": "Another appointment now overlaps this slot."
+    }
+  },
+  {
+    "time": "2026-11-11T13:18:10-08:00",
+    "actor": "Recovery agent",
+    "action": "AI response",
+    "details": {
+      "result": {
+        "action": "replan",
+        "reason": "Slot conflict"
+      },
+      "model": "llama3.2:3b",
+      "seconds": 6.22,
+      "input_tokens": 238,
+      "output_tokens": 19
+    }
+  },
+  {
+    "time": "2026-11-11T13:18:10-08:00",
+    "actor": "Calendar tool",
+    "action": "Read available appointments",
+    "details": {
+      "count": 8,
+      "selected_date": "2026-11-14"
+    }
+  },
+  {
+    "time": "2026-11-11T13:18:45-08:00",
+    "actor": "Scheduling agent",
+    "action": "AI response",
+    "details": {
+      "result": {
+        "slot_index": 2,
+        "reason": "Preferred time is 14:30, but the next available slot is 15:30, which is closer to the requested time of 14:00."
+      },
+      "model": "llama3.2:3b",
+      "seconds": 35.08,
+      "input_tokens": 772,
+      "output_tokens": 48
+    }
+  },
+  {
+    "time": "2026-11-11T13:19:08-08:00",
+    "actor": "Booking review agent",
+    "action": "AI response",
+    "details": {
+      "result": {
+        "ready_for_approval": true,
+        "explanation": "The proposal matches the available slot and service catalog. The requested time of 14:00 is an alternative that the customer must approve. The duration and price of the haircut service match the available slot and service catalog."
+      },
+      "model": "llama3.2:3b",
+      "seconds": 22.39,
+      "input_tokens": 502,
+      "output_tokens": 57
+    }
+  },
+  {
+    "time": "2026-11-11T13:19:08-08:00",
+    "actor": "Customer",
+    "action": "Approved exact proposal",
+    "details": {
+      "proposal_id": "de5e7b8fb65e42f4b59611c7db838978"
+    }
+  },
+  {
+    "time": "2026-11-11T13:19:08-08:00",
+    "actor": "Booking tool",
+    "action": "Simulated response interruption",
+    "details": {
+      "committed_booking_id": "f7ecd17517044283bbaac360b5a1c82f",
+      "next": "Retry with same request ID"
+    }
+  },
+  {
+    "time": "2026-11-11T13:19:12-08:00",
+    "actor": "Recovery agent",
+    "action": "AI response",
+    "details": {
+      "result": {
+        "action": "recover_booking",
+        "reason": "The booking response was interrupted after the write."
+      },
+      "model": "llama3.2:3b",
+      "seconds": 4.44,
+      "input_tokens": 232,
+      "output_tokens": 25
+    }
+  },
+  {
+    "time": "2026-11-11T13:19:12-08:00",
+    "actor": "Booking tool",
+    "action": "Recovered existing booking",
+    "details": {
+      "booking_id": "f7ecd17517044283bbaac360b5a1c82f",
+      "duplicate_created": false
+    }
+  },
+  {
+    "time": "2026-11-11T13:19:12-08:00",
+    "actor": "Confirmation agent",
+    "action": "Read saved booking",
+    "details": {
+      "booking_id": "f7ecd17517044283bbaac360b5a1c82f"
+    }
+  },
+  {
+    "time": "2026-11-11T13:19:36-08:00",
+    "actor": "Confirmation agent",
+    "action": "AI response",
+    "details": {
+      "result": {
+        "booking_reference": "f7ecd17517044283bbaac360b5a1c82f",
+        "service_id": "haircut",
+        "stylist_id": "maya",
+        "start": "2026-11-14T15:30:00",
+        "end": "2026-11-14T16:15:00",
+        "price_cents": 4000,
+        "message": "Thank you for your appointment, we look forward to seeing you soon!"
+      },
+      "model": "llama3.2:3b",
+      "seconds": 23.95,
+      "input_tokens": 193,
+      "output_tokens": 111
+    }
+  },
+  {
+    "time": "2026-11-11T13:19:36-08:00",
+    "actor": "Receipt validator",
+    "action": "Confirmed receipt matches saved booking",
+    "details": {
+      "booking_reference": "f7ecd17517044283bbaac360b5a1c82f",
+      "service_id": "haircut",
+      "stylist_id": "maya",
+      "start": "2026-11-14T15:30:00",
+      "end": "2026-11-14T16:15:00",
+      "price_cents": 4000
+    }
+  }
+]

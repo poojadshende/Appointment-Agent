@@ -1,0 +1,4 @@
+.venv/
+.salon-data/
+__pycache__/
+.env
